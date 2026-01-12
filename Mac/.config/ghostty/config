@@ -1,0 +1,38 @@
+term = xterm-256color
+
+theme                       = vesper
+font-family                 = Berkeley Mono
+window-title-font-family    = Berkeley Mono
+font-size                   = 13
+font-thicken                = true
+bold-is-bright              = true
+
+shell-integration           = fish
+
+confirm-close-surface       = false
+window-colorspace           = display-p3
+window-padding-x            = 4
+window-padding-y            = 4
+window-decoration           = true
+macos-titlebar-style        = hidden
+macos-icon                  = custom-style
+macos-icon-frame            = beige
+macos-icon-ghost-color      = dark green
+macos-icon-screen-color     = dark green,black
+macos-option-as-alt         = true
+macos-window-shadow         = true
+background-opacity          = 1
+background-blur-radius      = 0
+unfocused-split-opacity     = 0.5
+quick-terminal-position     = bottom
+selection-invert-fg-bg      = true
+cursor-style                = block_hollow
+cursor-style-blink          = false
+link-url                    = true
+
+clipboard-read = allow
+clipboard-write = allow
+
+
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+keybind = global:alt+ctrl+shift+j=toggle_visibility

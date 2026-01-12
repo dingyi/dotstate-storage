@@ -1,0 +1,263 @@
+#
+#  █████╗ ███████╗██████╗  ██████╗ ███████╗██████╗  █████╗  ██████╗███████╗
+# ██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝
+# ███████║█████╗  ██████╔╝██║   ██║███████╗██████╔╝███████║██║     █████╗
+# ██╔══██║██╔══╝  ██╔══██╗██║   ██║╚════██║██╔═══╝ ██╔══██║██║     ██╔══╝
+# ██║  ██║███████╗██║  ██║╚██████╔╝███████║██║     ██║  ██║╚██████╗███████╗
+# ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝
+# https://github.com/nikitabobko/AeroSpace
+# https://nikitabobko.github.io/AeroSpace/guide
+
+start-at-login = true
+
+after-startup-command = [
+    'exec-and-forget sketchybar',
+    'exec-and-forget borders',
+    'exec-and-forget env PATH=$PATH:/usr/local/bin:/opt/homebrew/bin bash ~/.config/sketchybar/helpers/media-stream.sh'
+]
+
+exec-on-workspace-change = [
+    '/bin/bash',
+    '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+]
+
+# Notify Sketchybar about focuse change
+# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
+on-focus-changed = [
+    'exec-and-forget sketchybar --trigger aerospace_focus_change'
+]
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+# The 'accordion-padding' specifies the size of accordion padding
+# You can set 0 to disable the padding feature
+accordion-padding = 30
+
+# Possible values: tiles|accordion
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus when focused monitor changes
+# Drop it from your config, if you don't like this behavior
+# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
+# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
+# Fallback value (if you omit the key): on-focused-monitor-changed = []
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
+# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
+# Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
+automatically-unhide-macos-hidden-apps = false
+
+# Possible values: (qwerty|dvorak|colemak)
+# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
+[key-mapping]
+    preset = 'qwerty'
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See:
+#                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[gaps]
+    inner.horizontal = 5
+    inner.vertical =   5
+    outer.left =       4
+    outer.bottom =     4
+    outer.top = [{ monitor."built-in" = 4 }, { monitor."BenQ" = 36 }, 4]
+    outer.right =      4
+
+# 'main' binding mode declaration
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# 'main' binding mode must be always presented
+# Fallback value (if you omit the key): mode.main.binding = {}
+[mode.main.binding]
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+    ctrl-tab = 'workspace-back-and-forth'
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
+    alt-shift-tab = [
+        'move-workspace-to-monitor --wrap-around next',
+        'exec-and-forget sketchybar --trigger aerospace_monitor_change TARGET_MONITOR=$(aerospace list-monitors --focused --format "%{monitor-appkit-nsscreen-screens-id}") FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)',
+    ]
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#mode
+    alt-shift-semicolon = [
+        'mode service',
+        'exec-and-forget sketchybar --trigger aerospace_enter_service_mode',
+    ]
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#layout
+    ctrl-slash = 'layout tiles horizontal vertical'
+    ctrl-comma = 'layout accordion horizontal vertical'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#focus
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+
+    alt-f = 'fullscreen'
+    alt-shift-c = 'reload-config'
+
+    alt-shift-space = 'layout floating tiling'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#resize
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+    ctrl-1 = 'workspace 1'
+    ctrl-2 = 'workspace 2'
+    ctrl-3 = 'workspace 3'
+    ctrl-4 = 'workspace 4'
+    ctrl-5 = 'workspace 5'
+    ctrl-6 = 'workspace 6'
+
+    # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+    alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+    alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+    alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+    alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+    alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+    alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+
+    alt-r = 'mode resize'
+    alt-e = 'balance-sizes'
+
+[mode.layout.binding]
+    esc = ['mode main']
+    e = 'layout accordion horizontal vertical'
+    h = 'move left'
+    j = 'move down'
+    k = 'move up'
+    l = 'move right'
+    f = 'fullscreen'
+    0 = ['flatten-workspace-tree', 'mode main']
+    g = ['layout floating tiling', 'mode main']
+    minus = 'resize smart -100'
+    equal = 'resize smart +100'
+
+[mode.resize.binding]
+    h = 'resize width -50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    l = 'resize width +50'
+    enter = 'mode main'
+    esc = 'mode main'
+
+# 'service' binding mode declaration.
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+[mode.service.binding]
+esc = [
+  'reload-config',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+]
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+#s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+f = [
+  'layout floating tiling',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+] # Toggle between floating and tiling layout
+backspace = [
+  'close-all-windows-but-current',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+]
+
+alt-shift-left = [
+  'join-with left',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+]
+alt-shift-down = [
+  'join-with down',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+]
+alt-shift-up = [
+  'join-with up',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+]
+alt-shift-right = [
+  'join-with right',
+  'mode main',
+  'exec-and-forget sketchybar --trigger aerospace_leave_service_mode',
+]
+
+down = 'volume down'
+up = 'volume up'
+shift-down = ['volume set 0', 'mode main']
+
+
+# Application to workspace mapping
+# 1 - design
+# 2 - coding
+# 3 - browser
+# 4 - chat
+# 5 - writing
+# 6 - music
+
+[[on-window-detected]]
+if.app-id = 'com.figma.Desktop'
+run = "move-node-to-workspace 1"
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'dev.warp.Warp-Stable'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.todesktop.230313mzl4w4u92'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.edgemac'
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = 'com.tencent.xinWeChat'
+run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = "move-node-to-workspace 6"

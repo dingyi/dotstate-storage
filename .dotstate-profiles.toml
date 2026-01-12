@@ -1,8 +1,13 @@
 [[profiles]]
 name = "Mac"
 synced_files = [
+    ".config/aerospace/aerospace.toml",
     ".config/alacritty",
+    ".config/amp/settings.json",
+    ".config/borders/bordersrc",
+    ".config/ghostty/config",
     ".config/kitty",
+    ".config/sesh",
     ".config/starship.toml",
     ".config/wezterm",
     ".config/zellij",

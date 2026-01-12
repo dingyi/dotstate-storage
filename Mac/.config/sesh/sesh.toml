@@ -1,0 +1,234 @@
+#
+# ███████╗███████╗███████╗██╗  ██╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+# ██╔════╝██╔════╝██╔════╝██║  ██║    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
+# ███████╗█████╗  ███████╗███████║    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+# ╚════██║██╔══╝  ╚════██║██╔══██║    ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+# ███████║███████╗███████║██║  ██║    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+# ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
+#
+# Smart session manager for the terminal
+# https://github.com/joshmedeski/sesh
+
+strict_mode = false
+
+import = [
+  "~/.config/sesh/configs/nu-sesh.toml",
+  "~/.config/sesh/configs/raycast-extensions.toml",
+]
+
+# [marker]
+# inactivity_threshold = 10    # Seconds before alerts start
+# alert_level_1_time = 60      # Light alert duration
+# alert_level_2_time = 300     # Medium alert duration
+# alert_level_3_time = 600     # Urgent alert duration
+
+blacklist = [
+  "^scratch$",
+  "^_"
+]
+
+wezterm_wallpapers_dir = "~/.config/wezterm/wallpapers"
+
+sort_order = ["tmux", "tmuxinator", "config", "zoxide"]
+dir_length = 3
+
+# default
+
+[default_session]
+startup_command = "nvim +GoToFile"
+preview_command = "eza --all --git --icons --color=always {}"
+# startup_command_ignore_dirs = ["~/repos", "~/.config"]
+
+[[session]]
+name = "diff"
+path = "~/Sites/Github/diff"
+startup_command = "~/.config/sesh/scripts/node_dev"
+windows = [ "ai", "dev" ]
+
+[[window]]
+name = "ai"
+startup_script = "opencode"
+
+[[window]]
+name = "dev"
+startup_script = "pnpm dev"
+
+# common
+
+[[session]]
+name = "second brain"
+path = "~/c/second-brain"
+startup_command = "nvim +ObsidianToday"
+
+[[session]]
+name = "plugins"
+path = "~"
+startup_command = "~/.config/bin/plugin_picker.sh && exit"
+
+[[session]]
+name = "fastfetch"
+path = "~/.config/fastfetch"
+startup_command = "fastfetch"
+preview_command = "fastfetch"
+
+[[session]]
+name = "rift"
+path = "~/c/rift"
+startup_command = "cargo run --bin rift --release"
+preview_command = "bat --language=toml --style=snip --color=always ~/.rift.toml"
+
+[[session]]
+name = "wallpaper"
+path = "~/.config/wezterm/wallpapers"
+startup_command = "wezterm_wallpaper_picker.sh && exit"
+
+[[session]]
+name = "update"
+path = "/tmp"
+startup_command = "update"
+preview_command = "bat --language=fish --style=snip --color=always ~/.config/bin/update"
+
+[[session]]
+name = "Downloads"
+path = "~/Downloads"
+startup_command = "yazi"
+
+[[session]]
+name = "repositories (c)"
+path = "~/c"
+startup_command = "l"
+
+[[session]]
+name = "home (~)"
+path = "~"
+disable_startup_command = true
+# startup_command = "l"
+
+# nutilti
+
+[[session]]
+name = "nutiliti pick worktree"
+path = "~/c/nu"
+startup_command = "sesh connect (find . -maxdepth 1 -type d | gum filter --limit 1 --fuzzy --no-sort --placeholder 'Pick a worktree' --prompt='🌲') && exit"
+
+[[session]]
+name = "nutiliti new worktree"
+path = "~/c/nu"
+startup_command = "nu_new_worktree"
+
+[[session]]
+name = "nutiliti reviews"
+path = "~/c/nu/review"
+startup_command = "gh dash"
+
+# sesh
+
+[[session]]
+name = "sesh pick worktree"
+path = "~/c/sesh"
+startup_command = "sesh connect (find . -maxdepth 1 -type d | gum filter --limit 1 --fuzzy --no-sort --placeholder 'Pick a worktree' --prompt='🌲') && exit"
+
+# dingyi
+
+[[session]]
+name = "ding.one"
+path = "~/Sites/Github/ding.one"
+startup_command = "~/.config/sesh/scripts/node_dev"
+
+# configs
+
+[[session]]
+name = "dotfiles"
+path = "~/c/dotfiles"
+
+[[session]]
+name = "aerospace config"
+path = "~/c/dotfiles/.config/aerospace"
+startup_command = "nvim aerospace.toml"
+preview_command = "bat --language=bash --style=snip --color=always ~/c/dotfiles/.config/aerospace/aerospace.toml"
+
+[[session]]
+name = "opencode config"
+path = "~/.config/opencode/config.json"
+startup_command = "nvim config.json"
+preview_command = "bat --language=json --style=snip --color=always ~/.config/opencode/config.json"
+
+[[session]]
+name = "fish config"
+path = "~/.config/fish"
+preview_command = "bat --language=fish --style=snip --color=always ~/.config/fish/config.fish"
+
+[[session]]
+name = "sesh config"
+path = "~/.config/sesh"
+startup_command = "nvim sesh.toml"
+preview_command = "bat --language=toml --style=snip --color=always ~/.config/sesh/sesh.toml"
+
+[[session]]
+name = "new sesh git worktree"
+path = "~/c/sesh"
+startup_command = "git worktree add (gum input --placeholder 'Enter new worktree name')"
+
+
+[[session]]
+name = "tmux config"
+path = "~/.config/tmux"
+startup_command = "nvim tmux.conf tmux-nerd-font-window-name.yml gitmux.yml"
+preview_command = "bat --language=bash --style=snip --color=always ~/.config/tmux/tmux.conf"
+
+[[session]]
+name = "leaderkey config"
+path = "nvim ~/.config/leaderkey/config.json"
+
+[[session]]
+name = "gitmux config"
+path = "~/.config/tmux"
+startup_command = "nvim gitmux.conf"
+
+[[session]]
+name = "hammerspoon config"
+path = "~/.hammerspoon"
+
+[[session]]
+name = "yazi config"
+path = "~/.config/yazi"
+startup_command = "nvim yazi.toml"
+
+[[session]]
+name = "my custom binaries"
+path = "~/.config/bin"
+
+[[session]]
+name = "ghostty config"
+path = "~/.config/ghostty"
+startup_command = "nvim config"
+
+[[session]]
+name = "karabiner elements config"
+path = "~/.config/karabiner"
+
+[[session]]
+name = "/ect/hosts"
+path = "/etc"
+startup_command = "sudo nvim hosts"
+
+[[session]]
+name = "lazyvim config (legacy)"
+path = "~/.config/lazyvim"
+
+# tools
+
+[[session]]
+name = "mactop"
+path = "/"
+startup_command = "sudo mactop"
+
+# other
+
+
+
+# windows
+
+[[window]]
+name = "git"
+startup_script = "git pull && lazygit"

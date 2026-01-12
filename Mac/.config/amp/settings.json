@@ -1,0 +1,41 @@
+{
+  "amp.mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    }
+  },
+  "amp.mcpPermissions": [
+    {
+      "matches": {
+        "command": "npx",
+        "args": "* @playwright/mcp@*"
+      },
+      "action": "allow"
+    },
+    {
+      "matches": {
+        "url": "https://mcp.trusted.com/mcp"
+      },
+      "action": "allow"
+    },
+    {
+      "matches": {
+        "command": "python",
+        "args": "*bad_command*"
+      },
+      "action": "reject"
+    },
+    {
+      "matches": {
+        "url": "*/malicious.com*"
+      },
+      "action": "reject"
+    }
+  ],
+  "amp.dangerouslyAllowAll": true
+
+}
