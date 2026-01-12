@@ -1,4 +1,10 @@
 [[profiles]]
 name = "Mac"
-synced_files = []
+synced_files = [
+    ".config/alacritty",
+    ".config/kitty",
+    ".config/starship.toml",
+    ".config/wezterm",
+    ".config/zellij",
+]
 packages = []
