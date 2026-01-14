@@ -1,0 +1,4 @@
+collections:
+  Obsidian:
+    path: /Users/dingyi/Obsidian
+    pattern: "**/*.md"
