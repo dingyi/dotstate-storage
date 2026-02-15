@@ -10,6 +10,7 @@ synced_files = [
     ".config/alacritty",
     ".config/amp/settings.json",
     ".config/borders/bordersrc",
+    ".config/fish/config.fish",
     ".config/ghostty/config",
     ".config/helix",
     ".config/kitty",
