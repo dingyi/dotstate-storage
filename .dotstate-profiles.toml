@@ -1,3 +1,8 @@
+version = 1
+
+[common]
+synced_files = []
+
 [[profiles]]
 name = "Mac"
 synced_files = [
