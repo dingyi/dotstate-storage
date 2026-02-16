@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     opts = function(_, opts)
       -- Extend default options
       opts = opts or {}

@@ -3,8 +3,18 @@ return {
     "snacks.nvim",
     opts = {
       dashboard = { example = "compact_files" },
+      notifier = {
+        timeout = 5000, -- 5秒，默认是3000ms
+      },
     },
     keys = {
+      {
+        "<leader>snh",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "Show notification history",
+      },
       {
         "<leader>pp",
         function()

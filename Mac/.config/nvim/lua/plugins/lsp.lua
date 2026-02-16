@@ -19,11 +19,10 @@ return {
   -- lsp servers
   {
     "neovim/nvim-lspconfig",
-    opts = function()
-      return {
-        inlay_hints = { enabled = false },
-        ---@type lspconfig.options
-        servers = {
+    opts = {
+      inlay_hints = { enabled = false },
+      ---@type lspconfig.options
+      servers = {
         -- Global keymaps for all LSP servers
         ["*"] = {
           keys = {
@@ -143,8 +142,6 @@ return {
           },
         },
       },
-      setup = {},
-    }
-    end,
+    },
   },
 }

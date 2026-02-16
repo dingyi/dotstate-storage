@@ -1,16 +1,15 @@
-	return {
+return {
 	{
-		-- "craftzdog/solarized-osaka.nvim",
-		-- 'datsfilipe/vesper.nvim',
-		'wongmjane/nerv-theme',
+		"wongmjane/nerv-theme",
+		lazy = false,
 		priority = 1000,
-		init = function()
-			-- nerv-theme is a monorepo, the neovim colorscheme is in the neovim-theme subdirectory
-			local nerv_path = vim.fn.stdpath("data") .. "/lazy/nerv-theme/neovim-theme"
-			vim.opt.rtp:prepend(nerv_path)
+		config = function()
+			-- Theme lives in neovim-theme/ subfolder; add it to rtp so colors/nerv.lua is found
+			local nerv_theme_path = vim.fn.stdpath("data") .. "/lazy/nerv-theme/neovim-theme"
+			if vim.fn.isdirectory(nerv_theme_path) == 1 then
+				vim.opt.rtp:prepend(nerv_theme_path)
+			end
+			vim.cmd([[colorscheme nerv]])
 		end,
-		opts = {
-			transparent = false,
-		},
 	},
 }
