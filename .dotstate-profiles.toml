@@ -6,6 +6,8 @@ synced_files = []
 [[profiles]]
 name = "Mac"
 synced_files = [
+    ".claude/settings.json",
+    ".claude/statusline.sh",
     ".config/aerospace/aerospace.toml",
     ".config/alacritty",
     ".config/amp/settings.json",
