@@ -20,6 +20,8 @@ synced_files = [
     ".config/qmd",
     ".config/sesh",
     ".config/starship.toml",
+    ".config/tmux/gitmux.yml",
+    ".config/tmux/tmux.conf",
     ".config/wezterm",
     ".config/zellij",
 ]
